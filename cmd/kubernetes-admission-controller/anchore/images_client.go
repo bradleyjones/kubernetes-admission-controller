@@ -2,8 +2,10 @@ package anchore
 
 import (
 	"context"
-	anchore "github.com/anchore/kubernetes-admission-controller/pkg/anchore/client"
 	_nethttp "net/http"
+
+	anchoreEngine "github.com/anchore/enterprise-client-go/pkg/engine"
+	anchoreEnterprise "github.com/anchore/enterprise-client-go/pkg/enterprise"
 )
 
 // imagesClient abstracts the Anchore Go client's images service and exposes
@@ -11,17 +13,17 @@ import (
 type imagesClient interface {
 	AddImage(
 		ctx context.Context,
-		image anchore.ImageAnalysisRequest,
-		localVarOptionals *anchore.AddImageOpts,
-	) ([]anchore.AnchoreImage, *_nethttp.Response, error)
+		image anchoreEngine.ImageAnalysisRequest,
+		localVarOptionals *anchoreEnterprise.AddImageOpts,
+	) ([]anchoreEngine.AnchoreImage, *_nethttp.Response, error)
 	ListImages(
 		ctx context.Context,
-		localVarOptionals *anchore.ListImagesOpts,
-	) ([]anchore.AnchoreImage, *_nethttp.Response, error)
+		localVarOptionals *anchoreEnterprise.ListImagesOpts,
+	) ([]anchoreEngine.AnchoreImage, *_nethttp.Response, error)
 	GetImagePolicyCheck(
 		ctx context.Context,
 		imageDigest string,
 		tag string,
-		localVarOptionals *anchore.GetImagePolicyCheckOpts,
+		localVarOptionals *anchoreEnterprise.GetImagePolicyCheckOpts,
 	) ([]map[string]interface{}, *_nethttp.Response, error)
 }
